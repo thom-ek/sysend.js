@@ -123,12 +123,14 @@
         }
     }
     if (is_iframe()) {
-      window.addEventListener('message', function(e) {
-          var payload = JSON.parse(e.data);
-          if (payload.name === uniq_prefix) {
-              sysend.broadcast(payload.key, payload.data);
-          }
-      });
+        window.addEventListener('message', function(e) {
+            if(e.data) {
+                var payload = JSON.parse(e.data);
+                if (payload.name === uniq_prefix) {
+                    sysend.broadcast(payload.key, payload.data);
+                }
+            }
+        });
     }
     return {
         broadcast: function(event, message) {
