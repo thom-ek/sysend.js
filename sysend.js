@@ -125,7 +125,7 @@
     if (is_iframe()) {
         window.addEventListener('message', function(e) {
             if(e.data) {
-                var payload = JSON.parse(e.data);
+                var payload = typeof e.data === 'object' ? e.data : JSON.parse(e.data);
                 if (payload.name === uniq_prefix) {
                     sysend.broadcast(payload.key, payload.data);
                 }
